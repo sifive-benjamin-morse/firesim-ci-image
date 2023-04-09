@@ -1,16 +1,76 @@
 #!/bin/bash
 # Downloads, compiles, and installs dromajo.
 
-apt-get update && apt-get upgrade -y
+apt-get update && apt-get install apt-utils -y
+apt-get upgrade -y
+
+apt-get install -y linux-headers-$(uname -r)
+
 apt-get install -y \
-  man curl wget unzip tar ca-certificates libtool lsb-release perl git texinfo \
-  clang-13 clang-format-13 clang-tidy-13 software-properties-common \
-  build-essential make ninja-build pkg-config autoconf bc bison flex \
-  device-tree-compiler gawk tree openjdk-17-jdk openjdk-17-jre libfl2 libfl-dev \
-  libssl-dev libgmp-dev libmpfr-dev libmpc-dev zlib1g-dev libsqlite3-dev zstd \
-  libzstd-dev libcurl4-openssl-dev libmicrohttpd-dev libarchive-dev \
-  libdebuginfod-dev apt-transport-https gnupg python3-pip \
-  sudo cpio rsync kmod lzop parallel
+  apt-transport-https \
+  autoconf \
+  bc \
+  bison \
+  build-essential \
+  ca-certificates \
+  clang-13 \
+  clang-format-13 \
+  clang-tidy-13 \
+  cpio \
+  curl \
+  device-tree-compiler \
+  dkms \
+  flex \
+  gawk \
+  git \
+  gnupg \
+  kmod \
+  libarchive-dev \
+  libboost-dev \
+  libboost-system-dev \
+  libboost-filesystem-dev \
+  libboost-program-options-dev \
+  libboost-regex-dev \
+  libcurl4-openssl-dev \
+  libdebuginfod-dev \
+  libfl-dev \
+  libfl2 \
+  libgmp-dev \
+  libmicrohttpd-dev \
+  libmpc-dev \
+  libmpfr-dev \
+  libprotoc-dev \
+  libsqlite3-dev \
+  libssl-dev \
+  libtool \
+  libyaml-dev \
+  libzstd-dev \
+  lsb-release \
+  lzop \
+  make \
+  man \
+  ninja-build \
+  ocl-icd-opencl-dev \
+  openjdk-17-jdk \
+  openjdk-17-jre \
+  parallel \
+  perl \
+  pkg-config \
+  protobuf-compiler \
+  python3-pip \
+  rsync \
+  software-properties-common \
+  sudo \
+  tar \
+  texinfo \
+  tree \
+  udev \
+  unzip \
+  uuid-dev \
+  wget \
+  zlib1g-dev \
+  zstd
+
 apt-get clean
 
 ln -s /usr/bin/clang-13 /usr/bin/clang
