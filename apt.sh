@@ -1,10 +1,39 @@
 #!/bin/bash
 # Downloads, compiles, and installs dromajo.
 
-apt-get update && apt-get install apt-utils -y
+set -ex
+
+# Update the system.
+apt-get update
+apt-get install apt-utils software-properties-common wget -y
 apt-get upgrade -y
 
+# Add repositories for GCC and LLVM.
+wget --no-check-certificate -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
+add-apt-repository -y ppa:ubuntu-toolchain-r/test
+add-apt-repository -y 'deb http://apt.llvm.org/focal llvm-toolchain-focal-15 main'
+apt-get update
+
+# Install the Linux headers matching the kernel version.
 apt-get install -y linux-headers-$(uname -r)
+
+# Install compilers.
+apt-get install -y \
+  autoconf \
+  binutils \
+  bison \
+  lld-13 \
+  clang-13 \
+  clang-format-13 \
+  clang-tidy-13 \
+  flex \
+  g++-11 \
+  gcc-11 \
+  git \
+  libc-dev \
+  make
+
+# Install all dependencies.
 
 apt-get install -y \
   apt-transport-https \
@@ -75,12 +104,17 @@ apt-get install -y \
 apt-get autoremove
 apt-get clean
 
-ln -s /usr/bin/clang-13 /usr/bin/clang
-ln -s /usr/bin/clang++-13 /usr/bin/clang++
-ln -s /usr/bin/clang-tidy-13 /usr/bin/clang-tidy
-ln -s /usr/bin/clang-tidy-diff-13.py /usr/bin/clang-tidy-diff
-ln -s /usr/bin/clang-format-13 /usr/bin/clang-format
-ln -s /usr/bin/clang-format-diff-13 /usr/bin/clang-format-diff
-ln -s /usr/bin/git-clang-format-13 /usr/bin/git-clang-format
-ln -s /usr/bin/lld-13 /usr/bin/lld
-ln -s /usr/bin/lld-13 /usr/bin/ld.lld
+pip3 install -U pybind11
+
+# Set up symlinks for GCC and LLVM.
+update-alternatives --install /usr/bin/gcc                 gcc               /usr/bin/gcc-11 30
+update-alternatives --install /usr/bin/g++                 g++               /usr/bin/g++-11 30
+update-alternatives --install /usr/bin/clang               clang             /usr/bin/clang-13 30
+update-alternatives --install /usr/bin/clang++             clang++           /usr/bin/clang++-13 30
+update-alternatives --install /usr/bin/clang-tidy          clang-tidy        /usr/bin/clang-tidy-13 30
+update-alternatives --install /usr/bin/clang-format        clang-format      /usr/bin/clang-format-13 30
+update-alternatives --install /usr/bin/clang-format-diff   clang-format-diff /usr/bin/clang-format-diff-13 30
+update-alternatives --install /usr/bin/git-clang-format    git-clang-format  /usr/bin/git-clang-format-13 30
+update-alternatives --install /usr/bin/clang-format-diff   clang-format-diff /usr/bin/clang-format-diff-13 30
+update-alternatives --install /usr/bin/lld                 lld               /usr/bin/lld-13 30
+update-alternatives --install /usr/bin/ld.lld              ld.lld            /usr/bin/lld-13 30
