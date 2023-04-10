@@ -22,15 +22,16 @@ apt-get install -y \
   dkms \
   flex \
   gawk \
+  gcc-12 \
   git \
   gnupg \
   kmod \
   libarchive-dev \
   libboost-dev \
-  libboost-system-dev \
   libboost-filesystem-dev \
   libboost-program-options-dev \
   libboost-regex-dev \
+  libboost-system-dev \
   libcurl4-openssl-dev \
   libdebuginfod-dev \
   libfl-dev \
@@ -71,6 +72,7 @@ apt-get install -y \
   zlib1g-dev \
   zstd
 
+apt-get autoremove
 apt-get clean
 
 ln -s /usr/bin/clang-13 /usr/bin/clang
