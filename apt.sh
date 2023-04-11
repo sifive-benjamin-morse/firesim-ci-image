@@ -27,8 +27,8 @@ apt-get install -y \
   clang-format-13 \
   clang-tidy-13 \
   flex \
-  g++-11 \
-  gcc-11 \
+  g++-11 gcc-11 libstdc++-11-dev \
+  g++-12 gcc-12 libstdc++-12-dev \
   git \
   libc-dev \
   make
@@ -42,16 +42,12 @@ apt-get install -y \
   bison \
   build-essential \
   ca-certificates \
-  clang-13 \
-  clang-format-13 \
-  clang-tidy-13 \
   cpio \
   curl \
   device-tree-compiler \
   dkms \
   flex \
   gawk \
-  gcc-12 \
   git \
   gnupg \
   kmod \
